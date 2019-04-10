@@ -48,10 +48,8 @@ class remp_tracking_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $remp_tracking, $version ) {
-
 		$this->remp_tracking = $remp_tracking;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -60,21 +58,7 @@ class remp_tracking_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in remp_tracking_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The remp_tracking_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->remp_tracking, plugin_dir_url( __FILE__ ) . 'css/remp-tracking-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -83,18 +67,9 @@ class remp_tracking_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in remp_tracking_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The remp_tracking_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		$remp_tracking_enabled = get_settings("remp_tracking_enabled");
+		if (!$remp_tracking_enabled) return; // Bailing!
+		$remp_tracking_timespan_enabled = get_settings("remp_tracking_timespan_enabled");
 		$remp_tracking_beam_url = get_settings("remp_tracking_beam_url");
 		$remp_cookie_domain = get_settings("remp_cookie_domain");
 		$remp_tracking_tracking_url = get_settings("remp_tracking_tracking_url");
@@ -102,6 +77,7 @@ class remp_tracking_Public {
 		$remp_post_title = esc_html( get_the_title() );
 		$remp_post_author = get_author_name(get_post( get_the_ID())->post_author);
 		$remp_post_id = get_the_ID();
+		$user_id = get_current_user_id();
 		?>
 		
 		<?php
@@ -114,6 +90,8 @@ class remp_tracking_Public {
 			"remp_post_title" => $remp_post_title,
 			"remp_post_author" => $remp_post_author,
 			"remp_post_id" => $remp_post_id,
+			"remp_tracking_timespan_enabled" => $remp_tracking_timespan_enabled,
+			"user_id" => ($user_id === 0) ? false : $user_id,
 		));
 	}
 
