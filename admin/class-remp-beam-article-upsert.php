@@ -33,7 +33,9 @@ class remp_BeamArticleUpsert {
         $this->url = get_settings("remp_tracking_beam_url") . "/api/articles/upsert";
         $this->token = get_settings("remp_tracking_property_token");
         $this->apikey = get_settings("remp_api_key");
-        add_action( 'save_post', array($this, 'upsert_post') );
+        if ($this->url && $this->token && $this->apikey) {
+            add_action( 'save_post', array($this, 'upsert_post') );
+        }
     }
 
     public function upsert_post( $post_id ) {
