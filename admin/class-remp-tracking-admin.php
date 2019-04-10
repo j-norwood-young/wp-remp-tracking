@@ -71,6 +71,7 @@ class remp_tracking_Admin {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) .  'admin/class-remp-tracking-options.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) .  'admin/class-remp-beam-article-upsert.php';
 	}
 
 	/**

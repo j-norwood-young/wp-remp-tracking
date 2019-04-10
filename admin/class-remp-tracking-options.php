@@ -46,9 +46,16 @@ class remp_tracking_Options {
     }
 
     public function register_settings() {
+        register_setting( 'remp-tracking-settings-group', 'remp_tracking_crm_url' );
+        register_setting( 'remp-tracking-settings-group', 'remp_tracking_enabled' );
+        register_setting( 'remp-tracking-settings-group', 'remp_tracking_timespan_enabled' );
         register_setting( 'remp-tracking-settings-group', 'remp_tracking_beam_url' );
-        register_setting( 'remp-tracking-settings-group', 'remp_tracking_remplib_url' );
-        register_setting( 'remp-tracking-settings-group', 'remp_tracking_cookie_domain' );
+        register_setting( 'remp-tracking-settings-group', 'remp_tracking_tracking_url' );
+        register_setting( 'remp-tracking-settings-group', 'remp_tracking_property_token' );
+        register_setting( 'remp-tracking-settings-group', 'remp_campaign_url' );
+        register_setting( 'remp-tracking-settings-group', 'remp_mailer_url' );
+        register_setting( 'remp-tracking-settings-group', 'remp_cookie_domain' );
+        register_setting( 'remp-tracking-settings-group', 'remp_api_key' );
     }
     
     public function render_remp_tracking_options() {
@@ -65,24 +72,76 @@ class remp_tracking_Options {
                 <table class="form-table">
                     <tbody>
                         <tr>
+                            <th scope="row">CRM URL</th>
+                            <td>
+                                <input style="width: 600px; height: 40px;" name="remp_tracking_crm_url" placeholder="http://crm.remp.press" id="remp_tracking_crm_url" type="url" value="<?php echo esc_attr( get_option('remp_tracking_crm_url') ); ?>">
+                                <p class="description">The URL to location of CRM, eg. http://crm.remp.press.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Enable Tracking</th>
+                            <td>
+                                <label for="remp_tracking_enabled">
+                                    <input name="remp_tracking_enabled" type="checkbox" id="remp_tracking_enabled" value="1" <?= (get_option("remp_tracking_enabled")) ? 'checked="checked"' : "" ?>>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Enable Time Spent Tracking</th>
+                            <td>
+                                <label for="remp_tracking_timespan_enabled">
+                                    <input name="remp_tracking_timespan_enabled" type="checkbox" id="remp_tracking_timespan_enabled" value="1" <?= (get_option("remp_tracking_timespan_enabled")) ? 'checked="checked"' : "" ?>>
+                                </label>
+                                <p class="description">Warning: Generates multiple events per pageview</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">BEAM URL</th>
+                            <td>
+                                <input style="width: 600px; height: 40px;" name="remp_tracking_beam_url" placeholder="http://beam.remp.press" id="remp_tracking_beam_url" type="url" value="<?php echo esc_attr( get_option('remp_tracking_beam_url') ); ?>">
+                                <p class="description">The URL to location of BEAM, eg. http://beam.remp.press.</p>
+                            </td>
+                        </tr>
+                        <tr>
                             <th scope="row">BEAM Tracker URL</th>
                             <td>
-                                <input style="width: 600px; height: 40px;" name="remp_tracking_beam_url" placeholder="http://tracker.beam.remp.press" id="remp_tracking_beam_url" type="url" value="<?php echo esc_attr( get_option('remp_tracking_beam_url') ); ?>">
+                                <input style="width: 600px; height: 40px;" name="remp_tracking_tracking_url" placeholder="http://tracker.beam.remp.press" id="remp_tracking_tracking_url" type="url" value="<?php echo esc_attr( get_option('remp_tracking_tracking_url') ); ?>">
                                 <p class="description">The URL location of BEAM Tracker, eg. http://tracker.beam.remp.press.</p>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">Remplib.js URL</th>
+                            <th scope="row">BEAM Property Token</th>
                             <td>
-                                <input style="width: 600px; height: 40px;" name="remp_tracking_remplib_url" placeholder="http://beam.remp.press/assets/lib/js/remplib.js" id="remp_tracking_remplib_url" type="url" value="<?php echo esc_attr( get_option('remp_tracking_remplib_url') ); ?>">
-                                <p class="description">The URL to location of BEAM remplib.js, eg. http://beam.remp.press/assets/lib/js/remplib.js.</p>
+                                <input style="width: 600px; height: 40px;" name="remp_tracking_property_token" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" id="remp_tracking_property_token" type="text" value="<?php echo esc_attr( get_option('remp_tracking_property_token') ); ?>">
+                                <p class="description">The property token for BEAM Tracker. You can get it in Beam admin - Properties.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Campaign URL</th>
+                            <td>
+                                <input style="width: 600px; height: 40px;" name="remp_campaign_url" placeholder="http://campaign.remp.press" id="remp_campaign_url" type="url" value="<?php echo esc_attr( get_option('remp_campaign_url') ); ?>">
+                                <p class="description">The URL to location of Campaign, eg. http://campaign.remp.press.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mailer URL</th>
+                            <td>
+                                <input style="width: 600px; height: 40px;" name="remp_mailer_url" placeholder="http://mailer.remp.press" id="remp_mailer_url" type="url" value="<?php echo esc_attr( get_option('remp_mailer_url') ); ?>">
+                                <p class="description">The URL to location of Mailer, eg. http://mailer.remp.press.</p>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Cookie Domain</th>
                             <td>
-                                <input style="width: 600px; height: 40px;" name="remp_tracking_cookie_domain" placeholder=".remp.press" id="remp_tracking_cookie_domain" type="text" value="<?php echo esc_attr( get_option('remp_tracking_cookie_domain') ); ?>">
+                                <input style="width: 600px; height: 40px;" name="remp_cookie_domain" placeholder=".remp.press" id="remp_cookie_domain" type="text" value="<?php echo esc_attr( get_option('remp_cookie_domain') ); ?>">
                                 <p class="description">Controls where cookies (UTM parameters of visit) are stored, eg. .remp.press.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">API Key</th>
+                            <td>
+                                <input style="width: 600px; height: 40px;" name="remp_api_key" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" id="remp_api_key" type="password" value="<?php echo esc_attr( get_option('remp_api_key') ); ?>">
+                                <p class="description">API key. Generate in SSO.</p>
                             </td>
                         </tr>
                     </tbody>

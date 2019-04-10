@@ -96,17 +96,25 @@ class remp_tracking_Public {
 		 * class.
 		 */
 		$remp_tracking_beam_url = get_settings("remp_tracking_beam_url");
-		$remp_tracking_remplib_url = get_settings("remp_tracking_remplib_url");
-		$remp_tracking_cookie_domain = get_settings("remp_tracking_cookie_domain");
+		$remp_cookie_domain = get_settings("remp_cookie_domain");
+		$remp_tracking_tracking_url = get_settings("remp_tracking_tracking_url");
+		$remp_tracking_property_token = get_settings("remp_tracking_property_token");
+		$remp_post_title = esc_html( get_the_title() );
+		$remp_post_author = get_author_name(get_post( get_the_ID())->post_author);
+		$remp_post_id = get_the_ID();
 		?>
-		<script>
-			var remp_tracking_beam_url = "<?= $remp_tracking_beam_url ?>";
-			var remp_tracking_remplib_url = "<?= $remp_tracking_remplib_url ?>";
-			var remp_tracking_cookie_domain = "<?= $remp_tracking_cookie_domain ?>";
-		</script>
+		
 		<?php
-		wp_enqueue_script( $this->remp_tracking, plugin_dir_url( __FILE__ ) . 'js/remp-tracking-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script( "remp_script", plugin_dir_url( __FILE__ ) . 'js/remp-tracking-public.js', array( 'jquery' ) );
+		wp_localize_script( "remp_script", "remp_vars", array(
+			"remp_tracking_beam_url" => $remp_tracking_beam_url,
+			"remp_cookie_domain" => $remp_cookie_domain,
+			"remp_tracking_tracking_url" => $remp_tracking_tracking_url,
+			"remp_tracking_property_token" => $remp_tracking_property_token,
+			"remp_post_title" => $remp_post_title,
+			"remp_post_author" => $remp_post_author,
+			"remp_post_id" => $remp_post_id,
+		));
 	}
 
 }
