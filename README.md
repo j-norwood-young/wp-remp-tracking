@@ -12,7 +12,7 @@ You will need to set up a REMP BEAM implementation, or have access to one, to us
 
 ## Installation
 
-1. Upload `remp-tracking.php` to the `/wp-content/plugins/` directory
+1. Upload all files to the `/wp-content/plugins/wp-remp-tracking` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure the plugin under Settings/REMP Tracking
 
