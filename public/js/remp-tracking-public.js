@@ -41,7 +41,7 @@ var rempConfig = {
     token: remp_vars.remp_tracking_property_token,
     
     // optional, identification of logged user
-    userId: !!remp_vars.user_id,
+    userId: remp_vars.user_id || null,
     
     // optional, flag whether user is currently subscribed to the displayed content 
     // userSubscribed: Boolean,
