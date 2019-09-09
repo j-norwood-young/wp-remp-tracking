@@ -34,7 +34,7 @@ class remp_BeamArticleUpsert {
         $this->token = get_settings("remp_tracking_property_token");
         $this->apikey = get_settings("remp_api_key");
         if ($this->url && $this->token && $this->apikey) {
-            add_action( 'save_post', array($this, 'upsert_post') );
+            add_action( 'save_post', 'upsert_post' );
         }
     }
 
@@ -74,7 +74,7 @@ class remp_BeamArticleUpsert {
         );
         if ( is_wp_error( $response ) || ($response["response"]["code"] !== 200) ) {
             $message = json_decode($response["body"])->message;
-            add_action( 'admin_notices', array($this, '_errnotice') );
+            add_action( 'admin_notices', '_errnotice' );
         }
     }
 
