@@ -34,11 +34,17 @@ class remp_BeamArticleUpsert {
         $this->token = get_settings("remp_tracking_property_token");
         $this->apikey = get_settings("remp_api_key");
         if ($this->url && $this->token && $this->apikey) {
-            add_action( 'save_post', 'upsert_post' );
+            add_action( 'transition_post_status', function($new_status, $old_status, $post) { 
+                if ($new_status === "publish") { 
+                    $this->upsert_post($post); 
+                }
+            }, 10, 3 );
         }
     }
 
-    public function upsert_post( $post_id ) {
+    public function upsert_post( $post ) {
+        $post_id = $post->ID;
+        // $this->log("upsert_post {$post_id}");
         $sections = [];
         foreach(get_the_terms( $post_id, "section" ) as $term) {
             $sections[] = $term->name;
@@ -60,6 +66,8 @@ class remp_BeamArticleUpsert {
                 "published_at"=> $remp_post_date
             )]
         );
+        // $this->log(json_encode($data["articles"]));
+        add_action( 'admin_notices', '_errnotice' );
         $response = wp_remote_post( $this->url, 
             array(
                 'method' => 'POST',
@@ -84,5 +92,11 @@ class remp_BeamArticleUpsert {
             <p><?php _e( 'There has been an error saving this post to REMP Beam' ); ?></p>
         </div>
         <?php
+    }
+
+    private function log($data) {
+        $logfile = "./beam.log";
+        $line = date("c") . "\t" . $data . "\n";
+        file_put_contents($logfile, $line, FILE_APPEND);
     }
 }
