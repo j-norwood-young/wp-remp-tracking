@@ -48,24 +48,24 @@ var rempConfig = {
     
     // optional, controls where cookies (UTM parameters of visit) are stored
     cookieDomain: remp_vars.remp_cookie_domain,
-            
+    
+    article: {
+        id: remp_vars.remp_post_id + "", // required, ID of article in your CMS
+        author_id: remp_vars.remp_post_author, // optional, name of the author
+        // category: String, // optional, category/section of the article
+        // locked: Boolean, // optional, flag whether content was locked at the time of visit for this pageview
+        // tags: [String, String, String] // optional, any tags associated with the article
+    },
+
     // required, Tracker API specific options          
     tracker: {
         // required, URL location of BEAM Tracker
         url: remp_vars.remp_tracking_tracking_url,
-        
-        // optional, article details if pageview is on the article
-        article: {
-            id: remp_vars.remp_post_id + "", // required, ID of article in your CMS
-            author_id: remp_vars.remp_post_author, // optional, name of the author
-            // category: String, // optional, category/section of the article
-            // locked: Boolean, // optional, flag whether content was locked at the time of visit for this pageview
-            // tags: [String, String, String] // optional, any tags associated with the article
-        },
-        
-        // optional time spent measuring (default value `false`)
-        // if enabled, tracks time spent on current page
         timeSpentEnabled: !!remp_vars.remp_tracking_timespan_enabled,
+        readingProgress: {
+            enabled: !!remp_vars.remp_tracking_readingprogress_enabled,
+            interval: 5
+        },
     },
 };
 // console.log({ rempConfig });

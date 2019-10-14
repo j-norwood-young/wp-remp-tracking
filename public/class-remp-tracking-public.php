@@ -70,7 +70,9 @@ class remp_tracking_Public {
 		$remp_tracking_enabled = get_settings("remp_tracking_enabled");
 		if (!$remp_tracking_enabled) return; // Bailing!
 		$remp_tracking_timespan_enabled = get_settings("remp_tracking_timespan_enabled");
+		$remp_tracking_readingprogress_enabled = get_settings("remp_tracking_readingprogress_enabled");
 		$remp_tracking_beam_url = get_settings("remp_tracking_beam_url");
+		$remp_campaign_url = get_settings("remp_campaign_url");
 		$remp_cookie_domain = get_settings("remp_cookie_domain");
 		$remp_tracking_tracking_url = get_settings("remp_tracking_tracking_url");
 		$remp_tracking_property_token = get_settings("remp_tracking_property_token");
@@ -84,6 +86,7 @@ class remp_tracking_Public {
 		wp_enqueue_script( "remp_script", plugin_dir_url( __FILE__ ) . 'js/remp-tracking-public.js', array( 'jquery' ) );
 		wp_localize_script( "remp_script", "remp_vars", array(
 			"remp_tracking_beam_url" => $remp_tracking_beam_url,
+			"remp_campaign_url" => $remp_campaign_url,
 			"remp_cookie_domain" => $remp_cookie_domain,
 			"remp_tracking_tracking_url" => $remp_tracking_tracking_url,
 			"remp_tracking_property_token" => $remp_tracking_property_token,
@@ -91,7 +94,9 @@ class remp_tracking_Public {
 			"remp_post_author" => $remp_post_author,
 			"remp_post_id" => $remp_post_id,
 			"remp_tracking_timespan_enabled" => $remp_tracking_timespan_enabled,
+			"remp_tracking_readingprogress_enabled" => $remp_tracking_readingprogress_enabled,
 			"user_id" => ($user_id === 0) ? false : $user_id,
+			"remp_is_front_page" => is_front_page()
 		));
 	}
 
