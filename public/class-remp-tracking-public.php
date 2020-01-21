@@ -67,17 +67,17 @@ class remp_tracking_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		$remp_tracking_enabled = get_settings("remp_tracking_enabled");
+		$remp_tracking_enabled = get_option("remp_tracking_enabled");
 		if (!$remp_tracking_enabled) return; // Bailing!
-		$remp_tracking_timespan_enabled = get_settings("remp_tracking_timespan_enabled");
-		$remp_tracking_readingprogress_enabled = get_settings("remp_tracking_readingprogress_enabled");
-		$remp_tracking_beam_url = get_settings("remp_tracking_beam_url");
-		$remp_campaign_url = get_settings("remp_campaign_url");
-		$remp_cookie_domain = get_settings("remp_cookie_domain");
-		$remp_tracking_tracking_url = get_settings("remp_tracking_tracking_url");
-		$remp_tracking_property_token = get_settings("remp_tracking_property_token");
+		$remp_tracking_timespan_enabled = get_option("remp_tracking_timespan_enabled");
+		$remp_tracking_readingprogress_enabled = get_option("remp_tracking_readingprogress_enabled");
+		$remp_tracking_beam_url = get_option("remp_tracking_beam_url");
+		$remp_campaign_url = get_option("remp_campaign_url");
+		$remp_cookie_domain = get_option("remp_cookie_domain");
+		$remp_tracking_tracking_url = get_option("remp_tracking_tracking_url");
+		$remp_tracking_property_token = get_option("remp_tracking_property_token");
 		$remp_post_title = esc_html( get_the_title() );
-		$remp_post_author = get_author_name(get_post( get_the_ID())->post_author);
+		$remp_post_author = get_the_author_meta("display_name", get_post( get_the_ID())->post_author);
 		$remp_post_id = get_the_ID();
 		$user_id = get_current_user_id();
 		?>

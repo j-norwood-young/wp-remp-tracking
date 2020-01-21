@@ -30,9 +30,9 @@ class remp_BeamArticleUpsert {
     public function __construct( $remp_tracking, $version ) {
         $this->remp_tracking = $remp_tracking;
         $this->version = $version;
-        $this->url = get_settings("remp_tracking_beam_url") . "/api/articles/upsert";
-        $this->token = get_settings("remp_tracking_property_token");
-        $this->apikey = get_settings("remp_api_key");
+        $this->url = get_option("remp_tracking_beam_url") . "/api/articles/upsert";
+        $this->token = get_option("remp_tracking_property_token");
+        $this->apikey = get_option("remp_api_key");
         if ($this->url && $this->token && $this->apikey) {
             add_action( 'transition_post_status', function($new_status, $old_status, $post) { 
                 if ($new_status === "publish") { 
@@ -49,7 +49,7 @@ class remp_BeamArticleUpsert {
         foreach(get_the_terms( $post_id, "section" ) as $term) {
             $sections[] = $term->name;
         }
-        $remp_post_author = get_author_name(get_post($post_id)->post_author);
+        $remp_post_author = get_the_author_meta('display_name');
         $remp_post_title = esc_html( get_the_title($post_id) );
         $remp_post_url = get_the_permalink($post_id);
         $remp_post_date = get_the_date("c", $post_id);

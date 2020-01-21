@@ -52,9 +52,10 @@ var rempConfig = {
     article: {
         id: remp_vars.remp_post_id + "", // required, ID of article in your CMS
         author_id: remp_vars.remp_post_author, // optional, name of the author
-        // category: String, // optional, category/section of the article
-        // locked: Boolean, // optional, flag whether content was locked at the time of visit for this pageview
-        // tags: [String, String, String] // optional, any tags associated with the article
+        elementFn: function () {
+            var el = $(".article-container")[0] || document.body;
+            return el;
+        }
     },
 
     // required, Tracker API specific options          
