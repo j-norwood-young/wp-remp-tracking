@@ -68,6 +68,10 @@ var rempConfig = {
             interval: 5
         },
     },
+
+    campaign: {
+        url: remp_vars.remp_campaign_url
+    }
 };
 // console.log({ rempConfig });
 remplib.tracker.init(rempConfig);
