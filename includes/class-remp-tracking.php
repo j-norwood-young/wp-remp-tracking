@@ -67,8 +67,8 @@ class remp_tracking {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'remp_tracking_VERSION' ) ) {
-			$this->version = remp_tracking_VERSION;
+		if ( defined( 'REMP_TRACKING_VERSION' ) ) {
+			$this->version = REMP_TRACKING_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}

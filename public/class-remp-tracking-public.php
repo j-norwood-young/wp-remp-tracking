@@ -83,7 +83,7 @@ class remp_tracking_Public {
 		?>
 		
 		<?php
-		wp_enqueue_script( "remp_script", plugin_dir_url( __FILE__ ) . 'js/remp-tracking-public.js', array( 'jquery' ) );
+		wp_enqueue_script( "remp_script", plugin_dir_url( __FILE__ ) . 'js/remp-tracking-public.js', array( 'jquery' ), $this->version );
 		wp_localize_script( "remp_script", "remp_vars", array(
 			"remp_tracking_beam_url" => $remp_tracking_beam_url,
 			"remp_campaign_url" => $remp_campaign_url,
