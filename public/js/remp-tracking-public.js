@@ -32,6 +32,7 @@
     
     // change URL to location of BEAM remplib.js
     load(remp_vars.remp_tracking_beam_url + "/assets/lib/js/remplib.js");
+    load(remp_vars.remp_campaign_url + "/assets/lib/js/remplib.js");
 })(window, document);
 
 // configuration
