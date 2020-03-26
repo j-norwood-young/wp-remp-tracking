@@ -44,12 +44,13 @@ class remp_BeamArticleUpsert {
 
     public function upsert_post( $post ) {
         $post_id = $post->ID;
+        $author_id = $post->post_author;
         // $this->log("upsert_post {$post_id}");
         $sections = [];
         foreach(get_the_terms( $post_id, "section" ) as $term) {
             $sections[] = $term->name;
         }
-        $remp_post_author = get_the_author_meta('display_name');
+        $remp_post_author = get_the_author_meta('display_name', $author_id);
         $remp_post_title = esc_html( get_the_title($post_id) );
         $remp_post_url = get_the_permalink($post_id);
         $remp_post_date = get_the_date("c", $post_id);
