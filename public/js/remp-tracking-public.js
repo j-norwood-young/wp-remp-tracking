@@ -71,7 +71,11 @@ var rempConfig = {
     },
 
     campaign: {
-        url: remp_vars.remp_campaign_url
+        url: remp_vars.remp_campaign_url,
+        variables: {
+            tags: remp_vars.remp_tags,
+            sections: remp_vars.remp_sections,
+        }
     }
 };
 // console.log({ rempConfig });
